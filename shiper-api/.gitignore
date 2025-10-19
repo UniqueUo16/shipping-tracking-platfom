@@ -1,0 +1,19 @@
+# Node.js dependencies
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+
+# Next.js output (if using Next.js)
+.next/
+out/
+build/
+
+# JSON or PDF files you don’t want tracked
+bookings.json
+receipt_*.pdf
