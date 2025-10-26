@@ -4,13 +4,21 @@ const fs = require("fs");
 const path = require("path");
 const nodemailer = require("nodemailer");
 const PDFDocument = require("pdfkit");
+const authRoutes = require("./routes/auth.js")
+const cookieParser = require("cookie-parser")
+const mongoose = require("mongoose")
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+app.use(cors({origin: "http://localhost:3000", credentials: true}));
 app.use(express.json());
+app.use(cookieParser())
+app.use("/api/auth", authRoutes);
 
-// ==== FILE DATABASE ====
+
+
+
+// ==== FILE DATABASE =============================================================
 const DB_FILE = path.join(__dirname, "bookings.json");
 function loadBookings() {
   if (!fs.existsSync(DB_FILE)) return [];
@@ -20,6 +28,13 @@ function saveBookings(bookings) {
   fs.writeFileSync(DB_FILE, JSON.stringify(bookings, null, 2));
 }
 
+mongoose.connect(process.env.MongoDB_URI)
+.then(() => console.log("✅ MongoDb connected"))
+.catch((err) => console.log(err));
+
+
+
+//======================================================================================
 // ==== EMAIL TRANSPORT ====
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -47,7 +62,7 @@ function generateReceipt(booking) {
   doc.moveDown(0.5);
   doc.fontSize(16).text("📦 Shipment Receipt", { align: "center" });
   doc.moveDown(2);
-
+  
   // ===== Booking Details =====
   doc.fontSize(12).text(`Tracking ID: ${booking.trackingId}`);
   doc.text(`Name: ${booking.customer.name}`);
@@ -75,6 +90,11 @@ function generateReceipt(booking) {
   doc.end();
   return pdfPath;
 }
+app.use((req, res, next) => {
+  console.log("➡️", req.method, req.url);
+  next();
+});
+
 
 // ==== BOOKING ROUTE ====
 app.post("/api/bookings", (req, res) => {

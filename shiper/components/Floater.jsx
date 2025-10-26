@@ -15,6 +15,13 @@ export default function Pricing() {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
   const handleSubmit = (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token")
+
+    if (!token){
+      alert("!Do you have an account? , login To proceed")
+      router.push("/Ex_pages/Login")
+    }
+    
     setSubmitted(true);
     alert("Booking Submitted redirecting...", form);
     setTimeout(() => {
@@ -38,7 +45,7 @@ export default function Pricing() {
           <div className="w-80 bg-white text-black p-4 rounded-2xl shadow-lg relative">
             <button
               onClick={() => setOpen(false)}
-              className="absolute -top-3 -right-3 bg-amber-600  rounded-full w-6 h-6 flex items-center justify-center hover:bg-amber-700 transition"
+              className="absolute -top-3 -right-3 bg-blue-600  rounded-full w-6 h-6 flex items-center justify-center hover:bg-amber-700 transition"
             >
               ×
             </button>
@@ -65,7 +72,7 @@ export default function Pricing() {
                   className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
                   required
                 />
-                <input
+                {/* <input
                   type="date"
                   name="date"
                   value={form.date}
@@ -84,10 +91,10 @@ export default function Pricing() {
                   <option value="Standard">📦 Standard (3-5 days)</option>
                   <option value="Express">⚡ Express (1-2 days)</option>
                   <option value="Same-Day"> Same-Day Delivery</option>
-                </select>
+                </select> */}
                 <button
                   type="submit"
-                  className="w-full bg-amber-600 text-white font-semibold py-2 rounded-xl hover:bg-amber-700 transition"
+                  className="w-full bg-blue-600 text-white font-semibold py-2 rounded-xl hover:bg-amber-700 transition"
                 >
                   Book Now
                 </button>
@@ -97,7 +104,7 @@ export default function Pricing() {
         ) : (
           <button
             onClick={() => setOpen(true)}
-            className="w-14 h-14 rounded-full bg-amber-600 text-white flex items-center justify-center shadow-lg hover:bg-amber-700 transition"
+            className="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg hover:bg-amber-700 transition"
           >
             📅
           </button>

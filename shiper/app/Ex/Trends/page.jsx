@@ -2,7 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Montserrat } from "next/font/google";
 
+
+
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
 
 export default function Ser() {
   const slides = [
@@ -49,13 +57,7 @@ export default function Ser() {
   };
 
   return (
-    <div className="relative w-full h-[400px] overflow-hidden">
-      {/* Image */}
-      <img
-        src={slides[current].src}
-        alt={`Slide ${current}`}
-        className="w-full h-full object-cover"
-      />
+    <div className={`${montserrat.className} bg-blue-600 relative w-full h-[400px] overflow-hidden`}>
 
       {/* Overlay for text and buttons */}
     <div className="absolute inset-0 bg-black/30 flex flex-col justify-center items-center text-center px-4">
@@ -67,26 +69,14 @@ export default function Ser() {
     initial={{ opacity: 0, x: -100 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ ease: "easeInOut", duration: 0.8 }}
-    className="text-white mt-2 text-lg md:text-xl drop-shadow-md"
+    className="text-white mt-2 text-md md:text-md drop-shadow-md"
   >
     {textslide[current % textslide.length]}
   </motion.h4>
+
+
 </div>
 
-      {/* <div className="flex gap-4 mt-4">
-          <button
-            onClick={prevSlide}
-            className="bg-white/80 hover:bg-white text-black px-4 py-2 rounded"
-          >
-            Prev
-          </button>
-          <button
-            onClick={nextSlide}
-            className="bg-white/80 hover:bg-white text-black px-4 py-2 rounded"
-          >
-            Next
-          </button>
-        </div> */}
     </div>
   );
 }

@@ -1,9 +1,18 @@
+"use client"
+import { Montserrat } from "next/font/google";
+
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
 import { ArrowRight, Network } from "lucide-react";
 import Image from "next/image";
 
 export default function Supp() {
   return (
-    <div className="w-full">
+    <div className={`${montserrat.className} w-full`}>
       {/* Numbers / Stats Section */}
       <section className="bg-white w-full py-12 text-center">
         <h2 className="text-2xl sm:text-3xl  text-black mb-6">

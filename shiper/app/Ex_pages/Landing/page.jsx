@@ -11,9 +11,10 @@ const montserrat = Montserrat({
 
 export default function Landing() {
   return (
-    <div
-      className={`${montserrat.className} relative h-[70vh] w-full overflow-hidden sm:mt-12`}
-    >
+   <div
+  className={`${montserrat.className} relative h-[70vh] w-full overflow-hidden pt-16 sm:pt-20`}
+>
+
       {/* Background image */}
       <Image
         src="/imgs/maersk-air-cargo.avif"
@@ -28,7 +29,7 @@ export default function Landing() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-center h-full text-white px-6 sm:px-16">
-        <h1 className="sm:text-6xl text-4xl font-bold tracking-wide leading-tight drop-shadow-lg">
+        <h1 className="sm:text-6xl  text-4xl font-bold tracking-wide leading-tight drop-shadow-lg">
           Ship Your Goods With Us
         </h1>
 
@@ -50,7 +51,7 @@ export default function Landing() {
 
         {/* Buttons */}
         <div className="flex flex-wrap gap-4 mt-10">
-          <button className="px-6 py-3 bg-[#00A0D0] hover:bg-[#008bb8] text-white rounded-md shadow-md font-semibold transition">
+         <button className="px-6 py-3 bg-blue-700 hover:bg-[#008bb8] text-white rounded-md shadow-md font-semibold transition">
             Get Started
           </button>
           <button className="px-6 py-3 border border-white hover:bg-white hover:text-[#00A0D0] text-white rounded-md shadow-md font-semibold transition">
@@ -59,7 +60,7 @@ export default function Landing() {
         </div>
 
         {/* Tagline */}
-        <div className="mt-8 text-sm sm:text-base font-medium text-gray-300 tracking-wide">
+        <div className="mt-8 text-sm sm:text-base font-medium text-gray-200 tracking-wide">
           Reliable ✅ Fast ✅ Secure
         </div>
       </div>
