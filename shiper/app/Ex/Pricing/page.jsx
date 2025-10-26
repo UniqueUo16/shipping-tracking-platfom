@@ -45,14 +45,18 @@ export default function Pricing() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 items-start">
             {/* Left Content */}
             <div className="flex flex-col justify-center">
-              <motion.h2 className="text-3xl font-bold text-center sm:text-left overflow-hidden"
-              initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: -50 }}
-            transition={{ ease: "easeInOut", duration: 0.8 }}
-            viewport={{ once: false, amount: 0.3 }}
-              >
-                Simplify your bookings with Shipfast Freight
-              </motion.h2>
+             <div className="overflow-hidden">
+  <motion.h2
+    className="text-3xl font-bold text-center sm:text-left"
+    initial={{ opacity: 0, x: 100 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ ease: "easeInOut", duration: 0.8 }}
+    viewport={{ once: false, amount: 0.3 }}
+  >
+    Simplify your bookings with Shipfast Freight
+  </motion.h2>
+</div>
+
               <motion.p className="mt-4 text-gray-300 text-center sm:text-left leading-relaxed"
                initial={{ opacity: 0, y: 200 }}
             whileInView={{ opacity: 1, y: 0 }}
