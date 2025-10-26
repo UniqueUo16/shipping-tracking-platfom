@@ -35,14 +35,14 @@ export default function BookingList() {
   };
 
   return (
-    <div className={`${montserrat.className} p-6 text-black mt-[5rem] max-w-4xl mx-auto bg-black sm:bg-gray-100`}>
-      <h2 className="text-2xl font-bold mb-6 sm:text-black text-gray-100">
+    <div className={`${montserrat.className} p-6 text-black mt-[5rem] max-w-4xl mx-auto  sm:bg-gray-100`}>
+      <h2 className="text-2xl font-bold mb-6 sm:text-black text-gray-900">
         🌐 All Bookings
       </h2>
 
       {bookings.length === 0 ? (
         <div className="text-center py-10 bg-gray-50 rounded-lg shadow-sm">
-          <p className="text-gray-500">No bookings found.</p>
+          <p className="text-gray-500">No bookings found. <br />Do You have an recent Bookings ?</p>
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

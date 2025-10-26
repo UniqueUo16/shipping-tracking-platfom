@@ -79,7 +79,9 @@ export default function TrackerPage() {
         >
           Track
         </button>
-        <Link href="/"><u>Exit</u></Link>
+        <Link href="/"><u>Exit</u></Link>  <br />           
+        <u> <Link href="/secure/user/udashboard">See All Bookings</Link> </u>
+        
       </div>
 
       {/* Error message */}

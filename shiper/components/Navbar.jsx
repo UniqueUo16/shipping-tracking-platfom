@@ -11,6 +11,7 @@ import {
   Truck,
   BoxIcon,
   Handshake,
+  BellRingIcon,
 } from "lucide-react";
 import { HomeIcon } from "lucide-react";
 import { Montserrat } from "next/font/google";
@@ -19,6 +20,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { AiFillNotification } from "react-icons/ai";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -96,13 +98,13 @@ const handleLogout = async () => {
           >
             SHIP<span className="text-[#e24242]">fast</span>
           </Link>
-          <button className="relative p-2 rounded-full bg-gray-200 transition">
-            <MessageCircleIcon className="text-[#1e1c6e]" />
+          <Link href="/secure/user/udashboard" className="relative p-2 rounded-full bg-gray-200 transition">
+            <BellRingIcon className="text-[#1e1c6e]" />
             <span className="absolute -top-1 -right-1 w-4 h-4 flex items-center justify-center text-[10px] text-white bg-red-600 rounded-full">
-              1
+              
             </span>
             
-          </button>
+          </Link>
           
         </div>
 

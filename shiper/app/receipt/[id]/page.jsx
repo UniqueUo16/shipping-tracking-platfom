@@ -47,7 +47,8 @@ export default function ReceiptPage() {
             onClick={() => window.print()}
             className="px-4 py-2  text-gray-600 rounded "
           >
-           <u> <Link href="/tracker">Track Shipping</Link> </u>
+           <u> <Link href="/tracker">Track Shipping</Link> </u> <br />
+           <u> <Link href="/secure/user/udashboard">See All Bookings</Link> </u>
           </button>
         </div>
       </div>

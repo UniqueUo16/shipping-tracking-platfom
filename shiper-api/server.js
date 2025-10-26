@@ -235,5 +235,35 @@ app.get("/api/track/:trackingId", (req, res) => {
   return res.status(404).json({ success: false, message: "No coordinates available" });
 });
 
+// ==== GET ALL BOOKINGS ====
+app.get("/api/bookings", (req, res) => {
+  try {
+    const bookings = loadBookings(); // read from bookings.json
+    res.json(bookings);
+  } catch (error) {
+    console.error("❌ Error loading bookings:", error);
+    res.status(500).json({ message: "Failed to load bookings" });
+  }
+});
+
+
+// ==== DELETE BOOKING ====
+app.delete("/api/bookings/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+    const bookings = loadBookings();
+    const updated = bookings.filter((b) => b.id != id);
+
+    if (updated.length === bookings.length)
+      return res.status(404).json({ message: "Booking not found" });
+
+    saveBookings(updated);
+    res.json({ success: true, message: "Booking deleted" });
+  } catch (error) {
+    console.error("❌ Error deleting booking:", error);
+    res.status(500).json({ message: "Server error deleting booking" });
+  }
+});
+
 
 app.listen(5000, () => console.log("🌐 Server running at http://localhost:5000"));

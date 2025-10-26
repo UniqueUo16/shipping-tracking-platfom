@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { SendIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { getSocket } from "../../lib/socketClient"; // adjust path
 
 export default function Booking() {
   const router = useRouter();

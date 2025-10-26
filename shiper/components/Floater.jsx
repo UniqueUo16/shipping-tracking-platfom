@@ -19,7 +19,7 @@ export default function Pricing() {
 
     if (!token){
       alert("!Do you have an account? , login To proceed")
-      router.push("/Ex_pages/Login")
+      router.push("/login")
     }
     
     setSubmitted(true);
