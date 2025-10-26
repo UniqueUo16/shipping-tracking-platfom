@@ -50,7 +50,7 @@ export default function RegisterPage() {
           Create an Account
         </h2>
         <p className="text-gray-500 text-center mb-6">
-          Join <span className="font-semibold text-green-600">FastShip</span> to
+          Join <span className="font-semibold text-blue-800">FastShip</span> to
           manage your shipments easily.
         </p>
 
@@ -63,7 +63,7 @@ export default function RegisterPage() {
               placeholder="John Doe"
               value={form.name}
               onChange={handleChange}
-              className="mt-1 w-full border border-gray-300 px-3 py-2 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
+              className="mt-1 text-black w-full border border-gray-300 px-3 py-2 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
               required
             />
           </div>
@@ -76,7 +76,7 @@ export default function RegisterPage() {
               placeholder="you@example.com"
               value={form.email}
               onChange={handleChange}
-              className="mt-1 w-full border border-gray-300 px-3 py-2 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
+              className="mt-1 w-full border border-gray-300 px-3 py-2 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none text-black"
               required
             />
           </div>
@@ -89,7 +89,7 @@ export default function RegisterPage() {
               placeholder="••••••••"
               value={form.password}
               onChange={handleChange}
-              className="mt-1 w-full border border-gray-300 px-3 py-2 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
+              className="mt-1 w-full text-black border border-gray-300 px-3 py-2 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
               required
             />
           </div>
@@ -97,7 +97,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex justify-center items-center bg-green-600 text-white py-2.5 rounded-lg hover:bg-green-700 transition font-medium"
+            className="w-full  flex justify-center items-center bg-blue-800 text-white py-2.5 rounded-lg hover:bg-green-700 transition font-medium"
           >
             {loading ? (
               <>

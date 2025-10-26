@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Truck, Airplay, Globe } from "lucide-react";
+import { Truck, Airplay, Globe, Ship } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Pricing() {
@@ -106,7 +104,7 @@ export default function Pricing() {
             onClick={() => setOpen(true)}
             className="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg hover:bg-amber-700 transition"
           >
-            📅
+          <Ship/>
           </button>
         )}
       </div>

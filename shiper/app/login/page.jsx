@@ -82,7 +82,7 @@ export default function LoginPage() {
               onChange={handleChange}
               required
               placeholder="you@example.com"
-              className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              className="w-full border px-4 text-black py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
           </div>
 
@@ -97,7 +97,7 @@ export default function LoginPage() {
               onChange={handleChange}
               required
               placeholder="Enter your password"
-              className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              className="w-full text-black border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
             <span
               className="absolute right-3 top-9 cursor-pointer text-gray-500"

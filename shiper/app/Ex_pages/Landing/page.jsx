@@ -17,10 +17,10 @@ export default function Landing() {
 
       {/* Background image */}
       <Image
-        src="/imgs/maersk-air-cargo.avif"
+        src="/imgs/sea-air_.avif"
         alt="Hero background"
         fill
-        className="object-cover"
+        className="object-cover bg-center"
         priority
       />
 
@@ -50,20 +50,55 @@ export default function Landing() {
         </span>
 
         {/* Buttons */}
-        <div className="flex flex-wrap gap-4 mt-10">
-         <button className="px-6 py-3 bg-blue-700 hover:bg-[#008bb8] text-white rounded-md shadow-md font-semibold transition">
+        <div className="flex gap-4 mt-10">
+         <a href="/Ex_pages/Bookings" className="px-6 py-3 bg-blue-700 hover:bg-[#008bb8] text-white rounded-md shadow-md font-semibold transition">
             Get Started
-          </button>
-          <button className="px-6 py-3 border border-white hover:bg-white hover:text-[#00A0D0] text-white rounded-md shadow-md font-semibold transition">
+          </a>
+          <a href="/tracker" className="px-6 py-3 border border-white hover:bg-white hover:text-[#00A0D0] text-white rounded-md shadow-md font-semibold transition">
             Track Shipment
-          </button>
+          </a>
         </div>
 
-        {/* Tagline */}
-        <div className="mt-8 text-sm sm:text-base font-medium text-gray-200 tracking-wide">
-          Reliable ✅ Fast ✅ Secure
-        </div>
+ <div className="flex text-white  flex-wrap justify-start items-start  gap-6  font-medium text-sm sm:text-base tracking-wide mt-8">
+  {/* Tagline 1 */}
+  <div className="flex items-center gap-2">
+    <span>Reliable</span>
+    <Image
+      src="/imgs/mark1.gif"
+      alt="mark1"
+      height={30}
+      width={30}
+      className="object-contain"
+    />
+  </div>
+
+  {/* Tagline 2 */}
+  <div className="flex items-center gap-2">
+    <span>Secure</span>
+    <Image
+      src="/imgs/mark3.gif"
+      alt="mark2"
+      height={30}
+      width={30}
+      className="object-contain"
+    />
+  </div>
+
+  {/* Tagline 3 */}
+  <div className="flex items-center gap-2">
+    <span>Fast</span>
+    <Image
+      src="/imgs/mark2.gif"
+      alt="mark3"
+      height={30}
+      width={30}
+      className="object-contain"
+    />
+  </div>
+</div>
+
       </div>
+     
     </div>
   );
 }

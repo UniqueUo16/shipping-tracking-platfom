@@ -34,7 +34,46 @@ export default function Services() {
   ];
 
   return (
-    <section className="bg-gray-100 py-12 px-6 space-y-16 overflow-hidden">
+    <section className="bg-gray-100  px-6 space-y-6 overflow-hidden">
+         {/* Tagline */}
+      <div className="flex flex-wrap justify-center items-center gap-6 text-gray-900 font-medium text-sm sm:text-base tracking-wide mt-8">
+  {/* Tagline 1 */}
+  <div className="flex items-center gap-2">
+    <span></span>
+    <Image
+      src="/imgs/mark1.gif"
+      alt="mark1"
+      height={30}
+      width={30}
+      className="object-contain"
+    />
+  </div>
+
+  {/* Tagline 2 */}
+  <div className="flex items-center gap-2">
+    <span></span>
+    <Image
+      src="/imgs/mark3.gif"
+      alt="mark2"
+      height={30}
+      width={30}
+      className="object-contain"
+    />
+  </div>
+
+  {/* Tagline 3 */}
+  <div className="flex items-center gap-2">
+    <span></span>
+    <Image
+      src="/imgs/mark2.gif"
+      alt="mark3"
+      height={30}
+      width={30}
+      className="object-contain"
+    />
+  </div>
+</div>
+
       {/* ------------------- WHAT WE DO ------------------- */}
       <span
         className="text-2xl text-black flex justify-center font-sans"

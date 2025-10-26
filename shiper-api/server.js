@@ -10,7 +10,13 @@ const mongoose = require("mongoose")
 require("dotenv").config();
 
 const app = express();
-app.use(cors({origin: "http://localhost:3000", credentials: true}));
+app.use(cors({
+  origin: [
+    "https://shipfastlogistics.vercel.app",  // your deployed frontend
+    "http://localhost:3000"              // keep for local testing
+  ],
+  credentials: true
+}));
 app.use(express.json());
 app.use(cookieParser())
 app.use("/api/auth", authRoutes);
