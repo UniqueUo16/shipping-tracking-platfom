@@ -10,7 +10,7 @@ export default function ReceiptPage() {
 
   useEffect(() => {
     async function fetchBooking() {
-      const res = await fetch(`http://localhost:5000/api/bookings/track/${id}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings/track/${id}`);
       const data = await res.json();
       if (data.success) setBooking(data.booking);
     }

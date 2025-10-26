@@ -38,7 +38,7 @@ export default function TrackerPage() {
   // Fetch location & path from backend
   const fetchLocation = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/track/${id}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/track/${id}`);
       const data = await res.json();
       if (data.success) {
         setLocation(data.location);

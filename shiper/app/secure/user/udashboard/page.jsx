@@ -30,7 +30,7 @@ export default function BookingList() {
     const confirm = window.confirm("Are you sure you want to delete this booking?");
     if (!confirm) return;
 
-    await fetch(`http://localhost:5000/api/bookings/${id}`, { method: "DELETE" });
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings/${id}`, { method: "DELETE" });
     fetchBookings();
   };
 

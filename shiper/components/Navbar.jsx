@@ -41,7 +41,7 @@ export default function Navbar() {
   // Fetch user info (if logged in)
 useEffect(() => {
   if (pathname !== "/login") {
-    fetch("http://localhost:5000/api/auth/me", { credentials: "include" })
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`, { credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error("Unauthorized");
         return res.json();
