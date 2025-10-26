@@ -25,6 +25,21 @@ export default function About() {
     },
   ];
 
+  const policies = [
+    {
+      title: "Privacy Policy",
+      text: "SHIPfast respects your privacy. We collect only essential information to process shipments and improve services. Your data is never sold or shared without consent.",
+    },
+    {
+      title: "Terms & Conditions",
+      text: "By using SHIPfast, you agree to our terms and conditions, including shipment obligations, payment terms, and liability limitations. Please review carefully before using our services.",
+    },
+    {
+      title: "Compliance & Licensing",
+      text: "We operate under all relevant international shipping and logistics regulations. Our licenses and certifications ensure secure and compliant handling of all shipments.",
+    },
+  ];
+
   return (
     <div className="mt-28">
       {/* Hero Section */}
@@ -52,7 +67,7 @@ export default function About() {
 
       {/* Services Section */}
       <section className="bg-gray-900 py-12 px-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">What We Do</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-12">What We Do</h2>
         <div className="max-w-6xl mx-auto space-y-16">
           {services.map((service, index) => (
             <div
@@ -69,9 +84,9 @@ export default function About() {
                 transition={{ duration: 1 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-2xl md:text-3xl font-bold mb-4">{service.title}</h3>
-                <p className="text-gray-700 mb-3">{service.text}</p>
-                <span className="text-blue-600 font-medium cursor-pointer hover:underline">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{service.title}</h3>
+                <p className="text-gray-200 mb-3">{service.text}</p>
+                <span className="text-blue-400 font-medium cursor-pointer hover:underline">
                   {service.readmore}
                 </span>
               </motion.div>
@@ -94,6 +109,26 @@ export default function About() {
                 />
               </motion.div>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Policies Section */}
+      <section className="bg-gray-100 py-12 px-6">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">Policies & Compliance</h2>
+        <div className="max-w-6xl mx-auto space-y-8">
+          {policies.map((policy, index) => (
+            <motion.div
+              key={index}
+              className="bg-white p-6 rounded-md shadow-md hover:shadow-lg transition"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.2 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-xl md:text-2xl font-bold mb-3">{policy.title}</h3>
+              <p className="text-gray-700 leading-relaxed">{policy.text}</p>
+            </motion.div>
           ))}
         </div>
       </section>

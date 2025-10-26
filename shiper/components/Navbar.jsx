@@ -18,6 +18,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function Navbar() {
   const [wrk, setWrk] = useState(false);
   const [ser, setSer] = useState(false);
   const [user, setUser] = useState(null);
+  const router = useRouter();
 
   const pathname = usePathname();
 
