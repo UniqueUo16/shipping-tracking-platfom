@@ -2,6 +2,18 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User.js");
 const bcrypt = require("bcrypt");
 
+// Helper to set cookie
+const setTokenCookie = (res, token) => {
+  const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // true in production
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    path: "/",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+  };
+  res.cookie("token", token, cookieOptions);
+};
+
 // Get current user
 const getUser = async (req, res) => {
   const token = req.cookies.token;
@@ -17,16 +29,14 @@ const getUser = async (req, res) => {
     // Clear cookie if invalid/expired
     res.cookie("token", "", {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       expires: new Date(0),
       path: "/",
     });
     res.status(401).json({ msg: "Unauthorized", error: err.message });
   }
 };
-
-
 
 // Register & auto-login
 const register = async (req, res) => {
@@ -42,7 +52,7 @@ const register = async (req, res) => {
     await newUser.save();
 
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
-    res.cookie("token", token, { httpOnly: true, secure: false, sameSite: "lax" });
+    setTokenCookie(res, token);
 
     res.status(201).json({ msg: "User registered & logged in successfully", user: newUser });
   } catch (error) {
@@ -63,7 +73,7 @@ const login = async (req, res) => {
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
-    res.cookie("token", token, { httpOnly: true, secure: false, sameSite: "lax" });
+    setTokenCookie(res, token);
 
     res.status(200).json({ msg: `Welcome back, ${user.name.split(" ")[0]}!`, user });
   } catch (err) {
@@ -71,20 +81,20 @@ const login = async (req, res) => {
   }
 };
 
+// Logout user
 const logout = (req, res) => {
   try {
     res.cookie("token", "", {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      expires: new Date(0), // expire immediately
-      path: "/", // important: ensure it clears the cookie for all paths
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      expires: new Date(0),
+      path: "/",
     });
     res.status(200).json({ msg: "Logged out successfully" });
   } catch (err) {
     res.status(500).json({ msg: "Server error", error: err.message });
   }
 };
-
 
 module.exports = { register, login, getUser, logout };

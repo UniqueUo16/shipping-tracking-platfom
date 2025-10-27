@@ -3,14 +3,12 @@
 import { useState, useEffect } from "react";
 import { SendIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { getSocket } from "../../lib/socketClient"; // adjust path
 
 export default function Booking() {
   const router = useRouter();
-  const [authorized, setAuthorized] = useState(false);
+  const [user, setUser] = useState(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -23,12 +21,23 @@ export default function Booking() {
     time: "",
   });
 
+  // --- Check auth
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) 
-      router.push("/login");
-    else setAuthorized(true);
-    setLoadingAuth(false);
+    async function checkAuth() {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`, {
+          credentials: "include", // ✅ include cookie
+        });
+        if (!res.ok) throw new Error("Unauthorized");
+        const data = await res.json();
+        setUser(data.user);
+      } catch {
+        router.push("/login"); // redirect if unauthorized
+      } finally {
+        setLoadingAuth(false);
+      }
+    }
+    checkAuth();
   }, [router]);
 
   const handleChange = (e) => {
@@ -39,14 +48,12 @@ export default function Booking() {
   const fetchCoordinates = async (address) => {
     try {
       const res = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-          address
-        )}`
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`
       );
       const data = await res.json();
       if (!data || data.length === 0) return null;
       return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
-    } catch (err) {
+    } catch {
       return null;
     }
   };
@@ -70,11 +77,11 @@ export default function Booking() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include", // ✅ include cookie so backend can authenticate
         body: JSON.stringify(bookingData),
       });
 
       const data = await res.json();
-
       if (!res.ok) throw new Error(data.msg || "Booking failed");
 
       alert(`✅ Saved! Tracking ID: ${data.trackingId}`);
@@ -87,73 +94,31 @@ export default function Booking() {
   };
 
   if (loadingAuth) return <p className="text-center mt-20">Checking authorization...</p>;
-  if (!authorized) return null;
+  if (!user) return null;
 
   return (
-    <div className="mt-28 flex justify-center items-start bg-black/50 bg-cover bg-center min-h-screen p-4" style={{ backgroundImage: "url('/imgs/air-cargo_.avif')" }}>
+    <div
+      className="mt-28 flex justify-center items-start bg-black/50 bg-cover bg-center min-h-screen p-4"
+      style={{ backgroundImage: "url('/imgs/air-cargo_.avif')" }}
+    >
       <form
         onSubmit={handleSubmit}
         className="p-6 w-full sm:w-[450px] text-white bg-black/70 space-y-4 rounded-lg shadow-lg"
       >
         <h2 className="text-2xl font-bold mb-4 text-center">📦 Book a Shipment</h2>
 
-        <input
-          type="text"
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          placeholder="Full Name"
-          className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
-        />
-
-        <input
-          type="email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          placeholder="Email"
-          className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
-        />
-
-        <input
-          type="tel"
-          name="phone"
-          value={form.phone}
-          onChange={handleChange}
-          placeholder="Phone"
-          className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-
-        <input
-          type="text"
-          name="pickupAddress"
-          value={form.pickupAddress}
-          onChange={handleChange}
-          placeholder="Pickup Address"
-          className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
-        />
-
-        <input
-          type="text"
-          name="deliveryAddress"
-          value={form.deliveryAddress}
-          onChange={handleChange}
-          placeholder="Delivery Address"
-          className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
-        />
-
-        <input
-          type="number"
-          name="weight"
-          value={form.weight}
-          onChange={handleChange}
-          placeholder="Package Weight (kg)"
-          className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        {["name", "email", "phone", "pickupAddress", "deliveryAddress", "weight"].map((field) => (
+          <input
+            key={field}
+            type={field === "email" ? "email" : field === "weight" ? "number" : "text"}
+            name={field}
+            value={form[field]}
+            onChange={handleChange}
+            placeholder={field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, " $1")}
+            className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required={["name", "email", "pickupAddress", "deliveryAddress"].includes(field)}
+          />
+        ))}
 
         <select
           name="serviceType"

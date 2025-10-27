@@ -30,7 +30,7 @@ export default function RegisterPage() {
       if (!res.ok) throw new Error(data.msg || "Registration failed");
 
       alert("✅ Registration successful!");
-      window.location.href = "/";
+      window.location.href = "/login";
     } catch (err) {
       alert("❌ " + err.message);
     } finally {
