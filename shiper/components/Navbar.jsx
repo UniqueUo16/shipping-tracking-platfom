@@ -17,10 +17,8 @@ import { HomeIcon } from "lucide-react";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { AiFillNotification } from "react-icons/ai";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -185,7 +183,7 @@ const handleLogout = async () => {
           </li>
           <li>
             <Link
-              href="/contact"
+              href="/Ex_pages/Pricing/#contactus"
               className="hover:text-[#e24242] flex items-center gap-1"
             >
               Contact <PhoneCall size={16} />
@@ -195,7 +193,7 @@ const handleLogout = async () => {
   <div className="absolute mt-23">
             <li>
             <Link
-              href="/contact"
+              href="/Ex_pages/Pricing/#contactus"
               className="hover:text-[#e24242] flex items-center gap-1"
             >
               Contact <PhoneCall size={16} />

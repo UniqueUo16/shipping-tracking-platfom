@@ -25,7 +25,8 @@ export default function Booking() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) router.push("/login");
+    if (!token) 
+      router.push("/login");
     else setAuthorized(true);
     setLoadingAuth(false);
   }, [router]);

@@ -51,7 +51,7 @@ export default function Landing() {
 
         {/* Buttons */}
         <div className="flex gap-4 mt-10">
-         <a href="/Ex_pages/Bookings" className="px-6 py-3 bg-blue-700 hover:bg-[#008bb8] text-white rounded-md shadow-md font-semibold transition">
+         <a href="/Ex_pages/Booking" className="px-6 py-3 bg-blue-700 hover:bg-[#008bb8] text-white rounded-md shadow-md font-semibold transition">
             Get Started
           </a>
           <a href="/tracker" className="px-6 py-3 border border-white hover:bg-white hover:text-[#00A0D0] text-white rounded-md shadow-md font-semibold transition">

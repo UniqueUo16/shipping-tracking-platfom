@@ -82,6 +82,7 @@ export default function Pricing() {
               animate={{  y: [0, -10, 0] }} // combines your float animation
               transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, repeatType: "loop" }}
             >
+              <a href="#contactus"></a>
               {/* Your form inputs here */}
 
               <span className="flex justify-between items-center text-xl font-semibold mb-4">
