@@ -21,24 +21,7 @@ export default function Booking() {
     time: "",
   });
 
-  // --- Check auth
-  useEffect(() => {
-    async function checkAuth() {
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`, {
-          credentials: "include", // ✅ include cookie
-        });
-        if (!res.ok) throw new Error("Unauthorized");
-        const data = await res.json();
-        setUser(data.user);
-      } catch {
-        router.push("/login"); // redirect if unauthorized
-      } finally {
-        setLoadingAuth(false);
-      }
-    }
-    checkAuth();
-  }, [router]);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -93,9 +76,7 @@ export default function Booking() {
     }
   };
 
-  if (loadingAuth) return <p className="text-center mt-20">Checking authorization...</p>;
-  if (!user) return null;
-
+ 
   return (
     <div
       className="mt-28 flex justify-center items-start bg-black/50 bg-cover bg-center min-h-screen p-4"

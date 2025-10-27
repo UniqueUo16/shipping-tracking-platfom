@@ -34,7 +34,7 @@ export default function LoginPage() {
 
       if (!res.ok) throw new Error(data.msg || "Login failed");
 
-      alert("✅ Login successful!");
+      alert("Login successful!");
       window.location.href = "/";
     } catch (err) {
       alert("❌ " + err.message);

@@ -3,16 +3,20 @@ const User = require("../models/User.js");
 const bcrypt = require("bcrypt");
 
 // Helper to set cookie
+// Helper to set JWT cookie
 const setTokenCookie = (res, token) => {
   const cookieOptions = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // true in production
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    path: "/",
+    httpOnly: true,        // cannot be accessed by JS
+    secure: true,          // works only on HTTPS (Render uses HTTPS)
+    sameSite: "none",      // allows cross-domain requests
+    path: "/",             // root path
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   };
+
   res.cookie("token", token, cookieOptions);
 };
+
+
 
 // Get current user
 const getUser = async (req, res) => {
@@ -24,15 +28,15 @@ const getUser = async (req, res) => {
     const user = await User.findById(decoded.id).select("-password");
     if (!user) throw new Error("User not found");
 
-    res.json({ user });
+    res.status(200).json({ user });
   } catch (err) {
-    // Clear cookie if invalid/expired
+    // Clear invalid cookie
     res.cookie("token", "", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      expires: new Date(0),
+      secure: true,       // required for HTTPS
+      sameSite: "none",   // required for cross-origin
       path: "/",
+      expires: new Date(0),
     });
     res.status(401).json({ msg: "Unauthorized", error: err.message });
   }
@@ -86,8 +90,8 @@ const logout = (req, res) => {
   try {
     res.cookie("token", "", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      secure: true,
+      sameSite: "none",
       expires: new Date(0),
       path: "/",
     });

@@ -68,7 +68,7 @@ export default function Landing() {
       alt="mark1"
       height={30}
       width={30}
-      className="object-contain"
+      className="object-contain rounded-full"
     />
   </div>
 
@@ -80,7 +80,7 @@ export default function Landing() {
       alt="mark2"
       height={30}
       width={30}
-      className="object-contain"
+      className="object-contain rounded-full"
     />
   </div>
 
@@ -92,7 +92,7 @@ export default function Landing() {
       alt="mark3"
       height={30}
       width={30}
-      className="object-contain"
+      className="object-contain rounded-full"
     />
   </div>
 </div>
