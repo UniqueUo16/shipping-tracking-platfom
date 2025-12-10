@@ -38,9 +38,7 @@ export default function ReceiptPage() {
           </p>
 
           <p className="sm:col-span-2">
-            <strong>Customer:</strong>{" "}
-            {booking.customer.name} ({booking.customer.email},{" "}
-            {booking.customer.phone})
+            <strong>Customer:</strong> {booking.customer.name} ({booking.customer.email}, {booking.customer.phone})
           </p>
 
           <p className="sm:col-span-2">
@@ -48,8 +46,7 @@ export default function ReceiptPage() {
           </p>
 
           <p className="sm:col-span-2">
-            <strong>Delivery Address:</strong>{" "}
-            {booking.shipment.deliveryAddress}
+            <strong>Delivery Address:</strong> {booking.shipment.deliveryAddress}
           </p>
 
           <p>
@@ -61,18 +58,15 @@ export default function ReceiptPage() {
           </p>
 
           <p>
-            <strong>Deadline:</strong> {booking.service.deadline} at{" "}
-            {booking.service.time}
+            <strong>Deadline:</strong> {booking.service.deadline} at {booking.service.time}
           </p>
 
           <p>
-            <strong>Status:</strong>{" "}
-            <span className="capitalize">{booking.status}</span>
+            <strong>Status:</strong> <span className="capitalize">{booking.status}</span>
           </p>
 
           <p className="sm:col-span-2">
-            <strong>Created At:</strong>{" "}
-            {new Date(booking.createdAt).toLocaleString()}
+            <strong>Created At:</strong> {new Date(booking.createdAt).toLocaleString()}
           </p>
         </div>
 
@@ -85,14 +79,11 @@ export default function ReceiptPage() {
             🖨️ Print Receipt
           </button>
 
-          <div className="text-center text-sm">
-            <Link href="/tracker" className="block text-blue-700 hover:underline">
+          <div className="text-center text-sm flex flex-col gap-1">
+            <Link href="/tracker" className="text-blue-700 hover:underline">
               Track Shipping
             </Link>
-            <Link
-              href="/secure/user/udashboard"
-              className="block text-blue-700 hover:underline"
-            >
+            <Link href="/secure/user/udashboard" className="text-blue-700 hover:underline">
               See All Bookings
             </Link>
           </div>

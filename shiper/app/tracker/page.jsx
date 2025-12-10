@@ -20,9 +20,8 @@ export default function TrackerPage() {
   const [error, setError] = useState("");
 
   const markerRef = useRef(null);
-
-  // Dynamically import L and create icon after window exists
   const [packageIcon, setPackageIcon] = useState(null);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const L = require("leaflet");
@@ -35,7 +34,6 @@ export default function TrackerPage() {
     }
   }, []);
 
-  // Fetch location & path from backend
   const fetchLocation = async (id) => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/track/${id}`);
@@ -47,12 +45,11 @@ export default function TrackerPage() {
       } else {
         setError(data.message || "Invalid Tracking ID");
       }
-    } catch (err) {
+    } catch {
       setError("Error fetching location");
     }
   };
 
-  // Poll every 3s
   useEffect(() => {
     if (!trackingId) return;
     fetchLocation(trackingId);
@@ -61,58 +58,51 @@ export default function TrackerPage() {
   }, [trackingId]);
 
   return (
-    <div className="mt-[6rem] text-black flex flex-col items-center p-6 space-y-4">
-      <h1 className="text-2xl font-bold">📍 Shipment Tracker</h1>
+    <div className="mt-[6rem] p-4 text-black flex flex-col items-center space-y-4">
+      <h1 className="text-2xl sm:text-3xl font-bold text-center">📍 Shipment Tracker</h1>
 
       {/* Tracking ID Input */}
-      <div className="flex-col space-x-2">
+      <div className="w-full max-w-md flex flex-col sm:flex-row sm:items-center gap-2">
         <input
           type="text"
           value={trackingId}
           onChange={(e) => setTrackingId(e.target.value)}
           placeholder="Enter Tracking ID"
-          className="border px-3 py-2 rounded w-64"
+          className="border rounded px-3 py-2 w-full sm:flex-1"
         />
         <button
           onClick={() => fetchLocation(trackingId)}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-          >
-          Paste code 
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full sm:w-auto"
+        >
+          Track
         </button>
-          <div>
-        <Link href="/"><u>Exit</u></Link>  <br />           
-        <u> <Link href="/secure/user/udashboard">See All Bookings</Link> </u>
-        </div>
-        
+      </div>
+
+      {/* Links */}
+      <div className="flex flex-col sm:flex-row gap-4 text-sm text-center sm:text-base">
+        <Link href="/" className="underline text-blue-600">Exit</Link>
+        <Link href="/secure/user/udashboard" className="underline text-blue-600">See All Bookings</Link>
       </div>
 
       {/* Error message */}
-      {error && <p className="text-red-600">{error}</p>}
+      {error && <p className="text-red-600 text-center">{error}</p>}
 
       {/* Map */}
       {location && packageIcon && (
-        <div className="w-full h-[60vh] max-w-4xl mt-4">
+        <div className="w-full max-w-4xl h-[60vh] mt-4 rounded overflow-hidden shadow-md">
           <MapContainer
             center={[location.lat, location.lng]}
             zoom={12}
             style={{ height: "100%", width: "100%" }}
           >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
-            {/* Polyline path */}
             {path.length > 0 && (
               <Polyline
                 positions={path.map(p => [p.lat, p.lng])}
                 pathOptions={{ color: "blue", weight: 4, opacity: 0.6 }}
               />
             )}
-
-            {/* Marker */}
-            <Marker
-              ref={markerRef}
-              position={[location.lat, location.lng]}
-              icon={packageIcon}
-            >
+            <Marker ref={markerRef} position={[location.lat, location.lng]} icon={packageIcon}>
               <Popup>📦 Your package is here</Popup>
             </Marker>
           </MapContainer>
