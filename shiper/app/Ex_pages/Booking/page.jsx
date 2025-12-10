@@ -135,7 +135,7 @@ export default function Booking() {
             submitting ? "bg-gray-600 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
           }`}
         >
-          {submitting ? "Booking... Please wait max 1min as we prepare your booking" : "Send"} <SendIcon size={18} />
+          {submitting ? "Creating Booking... Please wait max 1min" : "Send"} <SendIcon size={18} />
         </button>
       </form>
     </div>
