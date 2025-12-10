@@ -18,6 +18,7 @@ import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+
 import { useRouter } from "next/navigation";
 
 const montserrat = Montserrat({
@@ -32,27 +33,14 @@ export default function Navbar() {
   const [wrk, setWrk] = useState(false);
   const [ser, setSer] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
   
-useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`);
-      if (!res.ok) {
-        setUser(null);
-        return;
-      }
 
-      const data = await res.json();
-      setUser(data.user || null);
-    } catch (err) {
-      console.error("Error fetching user:", err);
-      setUser(null);
-    }
-  };
 
-  fetchUser();
-}, []);
+
+
+
 
 
 
@@ -100,29 +88,7 @@ useEffect(() => {
           
         </div>
 
-           {/* User section */}
-        <div className="md:hidden md:flex items-center gap-3 flex">
-          {user ? (
-            <>
-              <span className="text-sm font-medium text-gray-100">
-                👋 Hi, {user.name.split(" ")[0]}
-              </span>
-              <button
-                onClick={handleLogout}
-                className="bg-red-600 text-white px-3 py-1 rounded-md text-sm hover:bg-red-700 transition"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link
-              href="/login"
-              className="text-sm text-blue-600 font-medium hover:underline"
-            >
-              Login
-            </Link>
-          )}
-        </div>
+       
 
      
 
@@ -196,29 +162,9 @@ useEffect(() => {
           </div>
         </ul>
         </section>
-          {/* User section */}
-        <div className="hidden md:flex items-center gap-3">
-          {user ? (
-            <>
-              <span className="text-sm font-medium text-gray-100">
-                👋 Hi, {user.name.split(" ")[0]}
-              </span>
-              <button
-                onClick={handleLogout}
-                className="bg-red-600 text-white px-3 py-1 rounded-md text-sm hover:bg-red-700 transition"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link
-              href="/login"
-              className="text-sm text-blue-600 font-medium hover:underline"
-            >
-              Login
-            </Link>
-          )}
-        </div>
+        
+
+  
 
         {/* Mobile menu button */}
         <button

@@ -5,52 +5,99 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 
 export default function ReceiptPage() {
-  const { id } = useParams(); // trackingId
+  const { id } = useParams();
   const [booking, setBooking] = useState(null);
 
   useEffect(() => {
     async function fetchBooking() {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings/track/${id}`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/bookings/track/${id}`
+      );
       const data = await res.json();
       if (data.success) setBooking(data.booking);
     }
     if (id) fetchBooking();
   }, [id]);
 
-  if (!booking) return <p className="mt-[7rem] text-center">Loading receipt...</p>;
+  if (!booking)
+    return <p className="mt-[7rem] text-center text-sm sm:text-base">Loading receipt...</p>;
 
   return (
-    <div className="mt-[7rem] flex justify-center items-center p-6">
-      <div className="bg-gray-100 text-black shadow-lg rounded-lg p-6 w-full max-w-2xl">
-        <h1 className="text-2xl font-bold text-center mb-4">📦 Shipment Receipt</h1>
+    <div className="mt-[7rem] px-4 sm:px-6 flex justify-center">
+      <div className="bg-gray-100 text-black shadow-xl rounded-xl p-5 sm:p-8 w-full max-w-2xl">
 
-        <div className="space-y-2">
-          <p><strong>Tracking ID:</strong> {booking.trackingId}</p>
-          <p><strong>Customer:</strong> {booking.customer.name} ({booking.customer.email}, {booking.customer.phone})</p>
-          <p><strong>Pickup Address:</strong> {booking.shipment.pickupAddress}</p>
-          <p><strong>Delivery Address:</strong> {booking.shipment.deliveryAddress}</p>
-          <p><strong>Weight:</strong> {booking.shipment.weight} kg</p>
-          <p><strong>Service:</strong> {booking.service.type}</p>
-          <p><strong>Deadline:</strong> {booking.service.deadline} at {booking.service.time}</p>
-          <p><strong>Status:</strong> {booking.status}</p>
-          <p><strong>Created At:</strong> {new Date(booking.createdAt).toLocaleString()}</p>
+        {/* Title */}
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-6">
+          📦 Shipment Receipt
+        </h1>
+
+        {/* Content */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 text-sm sm:text-base">
+          <p className="sm:col-span-2">
+            <strong>Tracking ID:</strong> {booking.trackingId}
+          </p>
+
+          <p className="sm:col-span-2">
+            <strong>Customer:</strong>{" "}
+            {booking.customer.name} ({booking.customer.email},{" "}
+            {booking.customer.phone})
+          </p>
+
+          <p className="sm:col-span-2">
+            <strong>Pickup Address:</strong> {booking.shipment.pickupAddress}
+          </p>
+
+          <p className="sm:col-span-2">
+            <strong>Delivery Address:</strong>{" "}
+            {booking.shipment.deliveryAddress}
+          </p>
+
+          <p>
+            <strong>Weight:</strong> {booking.shipment.weight} kg
+          </p>
+
+          <p>
+            <strong>Service:</strong> {booking.service.type}
+          </p>
+
+          <p>
+            <strong>Deadline:</strong> {booking.service.deadline} at{" "}
+            {booking.service.time}
+          </p>
+
+          <p>
+            <strong>Status:</strong>{" "}
+            <span className="capitalize">{booking.status}</span>
+          </p>
+
+          <p className="sm:col-span-2">
+            <strong>Created At:</strong>{" "}
+            {new Date(booking.createdAt).toLocaleString()}
+          </p>
         </div>
 
-        <div className="mt-6 flex justify-center">
+        {/* Actions */}
+        <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center items-center">
           <button
             onClick={() => window.print()}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="w-full sm:w-auto px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
           >
             🖨️ Print Receipt
           </button>
-          <button
-            onClick={() => window.print()}
-            className="px-4 py-2  text-gray-600 rounded "
-          >
-           <u> <Link href="/tracker">Track Shipping</Link> </u> <br />
-           <u> <Link href="/secure/user/udashboard">See All Bookings</Link> </u>
-          </button>
+
+          <div className="text-center text-sm">
+            <Link href="/tracker" className="block text-blue-700 hover:underline">
+              Track Shipping
+            </Link>
+            <Link
+              href="/secure/user/udashboard"
+              className="block text-blue-700 hover:underline"
+            >
+              See All Bookings
+            </Link>
+          </div>
         </div>
+
       </div>
     </div>
   );

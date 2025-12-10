@@ -65,7 +65,7 @@ export default function TrackerPage() {
       <h1 className="text-2xl font-bold">📍 Shipment Tracker</h1>
 
       {/* Tracking ID Input */}
-      <div className="flex space-x-2">
+      <div className="flex-col space-x-2">
         <input
           type="text"
           value={trackingId}
@@ -76,11 +76,13 @@ export default function TrackerPage() {
         <button
           onClick={() => fetchLocation(trackingId)}
           className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Track
+          >
+          Paste code 
         </button>
+          <div>
         <Link href="/"><u>Exit</u></Link>  <br />           
         <u> <Link href="/secure/user/udashboard">See All Bookings</Link> </u>
+        </div>
         
       </div>
 

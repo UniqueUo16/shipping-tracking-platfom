@@ -18,7 +18,19 @@ const setTokenCookie = (res, token) => {
 
 
 
-// Get current user
+
+// Helper to set cookie
+const setTokenCookie = (res, token) => {
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,        // required for HTTPS (Render)
+    sameSite: "none",    // allows cross-origin
+    path: "/",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+  });
+};
+
+// GET /api/auth/me
 const getUser = async (req, res) => {
   const token = req.cookies.token;
   if (!token) return res.status(401).json({ msg: "No token, unauthorized" });
@@ -33,14 +45,15 @@ const getUser = async (req, res) => {
     // Clear invalid cookie
     res.cookie("token", "", {
       httpOnly: true,
-      secure: true,       // required for HTTPS
-      sameSite: "none",   // required for cross-origin
+      secure: true,
+      sameSite: "none",
       path: "/",
       expires: new Date(0),
     });
     res.status(401).json({ msg: "Unauthorized", error: err.message });
   }
 };
+
 
 // Register & auto-login
 const register = async (req, res) => {
