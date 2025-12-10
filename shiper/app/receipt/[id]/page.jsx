@@ -30,6 +30,9 @@ export default function ReceiptPage() {
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-6">
           📦 Shipment Receipt
         </h1>
+        <h1 className="font-mono font-bold text-center mb-6">
+          Please copy your tracker id , and proceed to the next stage
+        </h1>
 
         {/* Content */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 text-sm sm:text-base">
