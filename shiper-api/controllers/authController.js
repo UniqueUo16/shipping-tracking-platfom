@@ -4,31 +4,17 @@ const bcrypt = require("bcrypt");
 
 // Helper to set cookie
 // Helper to set JWT cookie
-const setTokenCookie = (res, token) => {
-  const cookieOptions = {
-    httpOnly: true,        // cannot be accessed by JS
-    secure: true,          // works only on HTTPS (Render uses HTTPS)
-    sameSite: "none",      // allows cross-domain requests
-    path: "/",             // root path
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-  };
-
-  res.cookie("token", token, cookieOptions);
-};
-
-
-
-
-// Helper to set cookie
+// Helper to set JWT cookie
 const setTokenCookie = (res, token) => {
   res.cookie("token", token, {
     httpOnly: true,
-    secure: true,        // required for HTTPS (Render)
-    sameSite: "none",    // allows cross-origin
+    secure: true,        // use true in production (HTTPS)
+    sameSite: "none",    // cross-origin requests
     path: "/",
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 };
+
 
 // GET /api/auth/me
 const getUser = async (req, res) => {
