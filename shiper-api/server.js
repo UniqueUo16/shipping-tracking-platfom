@@ -7,6 +7,7 @@ const PDFDocument = require("pdfkit");
 const authRoutes = require("./routes/auth.js")
 const cookieParser = require("cookie-parser")
 const mongoose = require("mongoose")
+const auth = require("./middleware/auth.js")
 require("dotenv").config();
 
 const app = express();
@@ -103,7 +104,7 @@ app.use((req, res, next) => {
 
 
 // ==== BOOKING ROUTE ====
-app.post("/api/bookings", (req, res) => {
+app.post("/api/bookings", auth, (req, res) => {
   const {
     name, email, phone,
     pickupAddress, deliveryAddress,

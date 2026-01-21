@@ -5,29 +5,34 @@ import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import { Montserrat } from "next/font/google";
 import Link from "next/link";
+import { Plus_Jakarta_Sans } from "next/font/google";
 
+const jk = Plus_Jakarta_Sans({
+  subsets:["cyrillic-ext"], weight:["400", "600"]
+})
 const montrasset = Montserrat({
   subsets: ["latin"],
   weight: ["300", "400", "700"],
 });
 
 export default function Services() {
+  const name = "Shipfast Logistics"
   const services = [
     {
       title: "Safe & Reliable Shipping",
-      text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia ut illo sint nobis voluptas doloribus nulla maiores impedit veniam similique asperiores alias perspiciatis labore quisquam, a, suscipit tempora excepturi accusamus explicabo temporibus neque obcaecati consequatur! Eveniet aut quia odit ipsam quaerat. Quia earum quam nemo, quisquam ducimus eveniet pariatur praesentiumLorem ipsum dolor sit amet consectetur adipisicing elit. Placeat ducimus repudiandae illum aut omnis voluptates.",
+      text: "At Shipfast we make every delivery safe, fast, and hassle-free. From local packages to international shipments, your items are handled with care and precision every step of the way. With our trusted network, advanced tracking, and professional service, you can rest easy knowing your shipment arrives on time and intact. Experience shipping that’s secure, efficient, and designed for peace of mind.",
       image: "/imgs/sea-air_.avif",
       readmore: "Read more",
     },
     {
       title: "Global Air Cargo",
-      text: "Fast and secure air freight solutions connecting businesses worldwide with efficiency and care.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia ut illo sint nobis voluptas doloribus nulla maiores impedit veniam similique asperiores alias perspiciatis labore quisquam, a, suscipit tempora excepturi accusamus explicabo temporibus neque obcaecati consequatur! Eveniet aut quia odit ipsam quaerat. Quia earum quam nemo, quisquam ducimus eveniet pariatur praesentiumLorem ipsum dolor sit amet consectetur",
+      text: "Fast, secure air freight solutions connecting businesses worldwide with precision and care. From delicate shipments to bulk cargo, we ensure reliable, on-time delivery every step of the way. Our team handles each package with expertise and dedication, giving you peace of mind across borders. Experience global shipping made simple, safe, and efficient—because your cargo deserves nothing less.",
       image: "/imgs/special-cargo.avif",
       readmore: "Read more",
     },
     {
       title: "Secure Packaging",
-      text: "We provide industry-standard packaging services to ensure your goods reach safely, no matter Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia ut illo sint nobis voluptas doloribus nulla maiores impedit veniam similique asperiores alias perspiciatis labore quisquam, a, suscipit tempora excepturi accusamus explicabo temporibus neque obcaecati consequatur! Eveniet aut quia odit ipsam quaerat. Quia earum quam nemo, quisquam ducimus eveniet pariatur praesentiumLorem ipsum dolor sit amet consectetur the distance.",
+      text: "We provide industry-standard packaging services to ensure your goods reach their destination safely, no matter the distance. Our solutions are designed to protect everything—from delicate items to heavy cargo—so you can have peace of mind with every shipment.With careful handling, robust materials, and expert techniques, we make sure your packages arrive intact, safe, and on time. Our team is dedicated to precision and reliability, ensuring that every shipment is treated with the highest level of care.Choose our secure packaging services for safe, efficient, and worry-free shipping, because your cargo deserves nothing less.",
       image: "/imgs/air-cargo_.avif",
       readmore: "Read more",
     },
@@ -36,43 +41,8 @@ export default function Services() {
   return (
     <section className="bg-gray-100  px-6 space-y-6 overflow-hidden">
          {/* Tagline */}
-      <div className="flex flex-wrap justify-center items-center gap-6 text-gray-900 font-medium text-sm sm:text-base tracking-wide mt-8">
-  {/* Tagline 1 */}
-  <div className="flex items-center gap-2">
-    <span></span>
-    <Image
-      src="/imgs/mark1.gif"
-      alt="mark1"
-      height={30}
-      width={30}
-      className="object-contain"
-    />
-  </div>
-
-  {/* Tagline 2 */}
-  <div className="flex items-center gap-2">
-    <span></span>
-    <Image
-      src="/imgs/mark3.gif"
-      alt="mark2"
-      height={30}
-      width={30}
-      className="object-contain"
-    />
-  </div>
-
-  {/* Tagline 3 */}
-  <div className="flex items-center gap-2">
-    <span></span>
-    <Image
-      src="/imgs/mark2.gif"
-      alt="mark3"
-      height={30}
-      width={30}
-      className="object-contain"
-    />
-  </div>
-</div>
+     
+  
 
       {/* ------------------- WHAT WE DO ------------------- */}
       <span
@@ -162,8 +132,8 @@ export default function Services() {
             <p
               className={`${montrasset.className} text-gray-700 text-[0.95rem] leading-relaxed`}
             >
-              We manage the entire process of moving your goods—from point of
-              origin to final destination—with precision and transparency. Our
+              We manage the entire process of moving your goods from point of
+              origin to final destination with precision and transparency. Our
               partnerships with carriers and our vast network of agents ensure
               timely, cost-effective delivery via air, sea, and land. We handle
               everything: shipment booking, documentation, cargo insurance,
@@ -173,7 +143,7 @@ export default function Services() {
         </div>
 
         {/* Services List */}
-        <div className="mt-16 text-center">
+        <div className={`${jk.className} mt-16 text-center`}>
           <h1 className="text-2xl text-gray-900 font-semibold mb-8">
             Our Freight Forwarding Services
           </h1>

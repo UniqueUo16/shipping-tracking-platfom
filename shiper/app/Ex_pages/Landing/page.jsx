@@ -12,7 +12,7 @@ const montserrat = Montserrat({
 export default function Landing() {
   return (
    <div
-  className={`${montserrat.className} relative h-[70vh] w-full overflow-hidden pt-16 sm:pt-20`}
+  className={`${montserrat.className} relative h-[70vh] w-full overflow-hidden pt-16 sm:pt-20 rounded-bl-[20rem] rounded-br-[20rem]`}
 >
 
       {/* Background image */}
@@ -59,7 +59,7 @@ export default function Landing() {
           </a>
         </div>
 
- <div className="flex text-white  flex-wrap justify-start items-start  gap-6  font-medium text-sm sm:text-base tracking-wide mt-8">
+ <div className="flex text-white  flex-wrap sm:justify-start justify-center sm:items-start items-center   gap-6  font-medium text-sm sm:text-base tracking-wide mt-8">
   {/* Tagline 1 */}
   <div className="flex items-center gap-2">
     <span>Reliable</span>

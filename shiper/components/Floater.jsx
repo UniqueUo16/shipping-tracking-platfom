@@ -47,7 +47,7 @@ export default function Pricing() {
             >
               ×
             </button>
-            <h3 className="text-xl font-bold mb-3 text-center">Fill The field to Book a slot <br /><span className="text-[0.8rem]">You would be redirected to <br /> the Booking form</span></h3>
+            <h3 className="text-xl font-bold mb-3 text-center">Experience the process <br /><span className="text-[0.8rem] text-red-500">You would be redirected to <br /> the Booking form</span></h3>
             {submitted ? (
               <p className="text-green-600 text-center font-semibold">✅ Booking Confirmed!</p>
             ) : (

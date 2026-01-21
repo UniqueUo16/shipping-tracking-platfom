@@ -1,14 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { SendIcon } from "lucide-react";
+import { LogIn, SendIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/context/authContext";
+
 
 export default function Booking() {
+  const { loading, user } = useAuth()
   const router = useRouter();
-  const [user, setUser] = useState(null);
-  const [loadingAuth, setLoadingAuth] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+
+  const handleroute = ()=>{
+    router.push("/login")
+  }
+  
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -20,6 +26,18 @@ export default function Booking() {
     deadline: "",
     time: "",
   });
+
+  if (!loading && !user){
+    return(
+      <div className="mt-25 flex justify-center flex-col items-center">
+        <h1 className="text-gray-600 text-5xl font-extrabold">OOPS</h1>
+        <span className="text-black">Do you have an account ? </span> 
+         <div className="flex gap-5 " onClick={handleroute}>
+          <span className="text-blue-600 "><u>Go to Login</u> </span><LogIn className="text-blue-500"/>
+        </div>
+      </div>
+      )
+    }
 
 
 
@@ -76,7 +94,9 @@ export default function Booking() {
     }
   };
 
- 
+  if (loading || !user) return null;
+
+
   return (
     <div
       className="mt-28 flex justify-center items-start bg-black/50 bg-cover bg-center min-h-screen p-4"

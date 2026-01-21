@@ -12,14 +12,14 @@ import {
   BoxIcon,
   Handshake,
   BellRingIcon,
+  LogOut,
 } from "lucide-react";
 import { HomeIcon } from "lucide-react";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useAuth } from "@/app/context/authContext";
 
-import { useRouter } from "next/navigation";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -32,16 +32,9 @@ export default function Navbar() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [wrk, setWrk] = useState(false);
   const [ser, setSer] = useState(false);
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
-  
-
-
-
-
-
-
+  const { user, logout, loading } = useAuth()
+  // const auth = useAuth();
+  // console.log("AUTH CONTEXT:", auth);
 
 
   // Hide navbar on scroll
@@ -61,6 +54,9 @@ export default function Navbar() {
     document.body.style.overflow = open ? "hidden" : "auto";
     return () => (document.body.style.overflow = "auto");
   }, [open]);
+
+    if (loading) return null;
+
 
   return (
     <nav
@@ -87,6 +83,26 @@ export default function Navbar() {
           </Link>
           
         </div>
+
+          <div className="flex items-center gap-4">
+        {user ? (
+  <>
+    <span className="text-sm">Hi, {user.name.split(" ")[0]}</span>
+    <button onClick={()=>{
+      console.log("LOGOUT CLICKED ");
+      logout();
+    }} title="Logout">
+      <LogOut />
+    </button>
+  </>
+) : (
+  <>
+    <Link href="/login">Login</Link>
+    <Link href="/register">Register</Link>
+  </>
+)}
+
+      </div>
 
        
 
@@ -332,29 +348,7 @@ export default function Navbar() {
                 Smart Warehousing — 2025 Innovations
               </span>
             </div>
-                 {/* User section */}
-        <div className="hidden md:flex items-center gap-3">
-          {user ? (
-            <>
-              <span className="text-sm font-medium text-gray-900">
-                👋 Hi, {user.name.split(" ")[0]}
-              </span>
-              <button
-                onClick={handleLogout}
-                className="bg-red-600 text-gray-900 px-3 py-1 rounded-md text-sm hover:bg-red-700 transition"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link
-              href="/login"
-              className="text-sm text-gray-900 font-medium hover:underline"
-            >
-              Login
-            </Link>
-          )}
-        </div>
+       
           </div>
           
 
