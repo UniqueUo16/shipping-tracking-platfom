@@ -127,7 +127,7 @@ export default function Booking() {
           onChange={handleChange}
           className="border p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="Standard">Standard</option>
+          <option value="Standard">Standad</option>
           <option value="Express">Express</option>
           <option value="Same-Day">Same-Day</option>
         </select>
